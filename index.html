@@ -178,7 +178,7 @@
 
       /* —— Hero —— */
       .hero-section {
-        height: 280vh;
+        height: 200vh;
         background: #000000;
         z-index: 10;
         position: relative;
@@ -976,11 +976,11 @@
           >
             <source
               media="(max-width: 768px)"
-              src="/videos/hero-mobile.mp4"
+              src="/videos/hero-mobile-scrub.mp4"
               type="video/mp4"
             />
             <source
-              src="https://d8j0ntlcm91z4.cloudfront.net/user_39ca84eAE1ODL9hbR5VhoEj8tBf/hf_20260627_212146_743b92b3-40a3-46cb-988d-7bf716564ec3.mp4"
+              src="/videos/hero-scrub.mp4"
               type="video/mp4"
             />
           </video>
@@ -1284,21 +1284,42 @@
         }
       }
 
-      // ponytail: direct scroll-to-time map; keep !video.seeking guard per AGENTS.md
-      function seekVideo(video, time) {
-        if (!video || !video.duration || video.seeking) return;
-        const t = Math.min(video.duration, Math.max(0, time));
-        if (Math.abs(video.currentTime - t) > 0.01) {
-          video.currentTime = t;
+      // ponytail: RAF + fastSeek + frame snap; scrub-encoded MP4s in public/videos/
+      const SCRUB_FPS = 24;
+      const heroScrub = { video: null, target: 0 };
+      const revealScrub = { video: null, target: 0 };
+
+      function snapToFrame(time) {
+        return Math.round(time * SCRUB_FPS) / SCRUB_FPS;
+      }
+
+      function applyScrubTarget(state) {
+        const video = state.video;
+        if (!video?.duration) return;
+        const t = snapToFrame(state.target);
+        if (Math.abs(video.currentTime - t) < 1 / (SCRUB_FPS * 2)) return;
+        if (typeof video.fastSeek === "function") video.fastSeek(t);
+        else video.currentTime = t;
+      }
+
+      function scrubLoop() {
+        if (!prefersReducedMotion) {
+          applyScrubTarget(heroScrub);
+          applyScrubTarget(revealScrub);
         }
+        requestAnimationFrame(scrubLoop);
+      }
+
+      function setScrubTarget(state, time) {
+        if (!state.video?.duration) return;
+        state.target = Math.min(state.video.duration, Math.max(0, time));
       }
 
       function syncHeroVideoToScroll() {
         const section = document.querySelector(".hero-section");
-        const video = document.getElementById("hero-video");
-        if (!section || !video?.duration || prefersReducedMotion) return;
+        if (!section || !heroScrub.video?.duration || prefersReducedMotion) return;
         const st = ScrollTrigger.getAll().find((t) => t.trigger === section);
-        if (st) seekVideo(video, st.progress * video.duration);
+        if (st) setScrubTarget(heroScrub, st.progress * heroScrub.video.duration);
       }
 
       function updateHeroAffordances(progress) {
@@ -1334,7 +1355,7 @@
           onUpdate: (self) => {
             const progress = self.progress;
             if (video.duration) {
-              seekVideo(video, progress * video.duration);
+              setScrubTarget(heroScrub, progress * video.duration);
             }
             updateHeroAffordances(progress);
 
@@ -1440,7 +1461,10 @@
           if (!video.duration) return;
           if (prog > horizEnd) {
             const vp = (prog - horizEnd) / (1 - horizEnd || 1);
-            seekVideo(video, Math.min(1, Math.max(0, vp)) * video.duration);
+            setScrubTarget(
+              revealScrub,
+              Math.min(1, Math.max(0, vp)) * video.duration
+            );
           }
         });
       }
@@ -1489,6 +1513,10 @@
 
       async function tryRefreshVideo(videoEl, shareUrl, fallbackDesktop) {
         if (!videoEl) return;
+        // ponytail: self-hosted scrub encodes in public/videos/ skip API swap
+        if ([...videoEl.querySelectorAll("source")].some((s) => /\/videos\//.test(s.src || s.getAttribute("src") || ""))) {
+          return;
+        }
         const desktopSource =
           videoEl.querySelector("source:not([media])") ||
           [...videoEl.querySelectorAll("source")].find((s) => !s.media);
@@ -1649,9 +1677,12 @@
 
         const heroVideo = document.getElementById("hero-video");
         const revealVideo = document.getElementById("reveal-video");
+        heroScrub.video = heroVideo;
+        revealScrub.video = revealVideo;
         tryRefreshVideo(heroVideo, HIGGSFIELD_HERO, HERO_VIDEO_URL);
         tryRefreshVideo(revealVideo, HIGGSFIELD_REVEAL, REVEAL_VIDEO_URL);
         setupRevealLazyLoad();
+        requestAnimationFrame(scrubLoop);
 
         heroVideo?.addEventListener("loadedmetadata", syncHeroVideoToScroll);
 
