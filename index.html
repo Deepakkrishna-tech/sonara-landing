@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sonara — Luxury Diamond Jewelry</title>
+    <meta
+      name="description"
+      content="Sonara — luxury diamond jewelry. Rings, necklaces, earrings, and bracelets cut without compromise."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <style>
+      :root {
+        --color-bg: #ffffff;
+        --color-primary-text: #000000;
+        --color-demoted-text: #000000;
+        --color-divider: #000000;
+        --color-accent: #c5a572;
+        --font-stack: "Inter Tight", "Inter", Arial, sans-serif;
+        --font-display: "Instrument Serif", Georgia, serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      body {
+        font-family: var(--font-stack);
+        background: var(--color-bg);
+        color: var(--color-primary-text);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: inherit;
+      }
+
+      img,
+      video {
+        display: block;
+        max-width: 100%;
+      }
+
+      /* —— Header —— */
+      .site-header {
+        position: fixed;
+        top: 32px;
+        left: 32px;
+        right: 32px;
+        height: 30px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+
+      .site-header .logo-link {
+        flex-shrink: 0;
+      }
+
+      .site-header a,
+      .site-header button {
+        pointer-events: auto;
+        transition: opacity 0.2s ease, transform 0.15s ease;
+      }
+
+      .site-header a:hover,
+      .site-header button:hover {
+        opacity: 0.7;
+      }
+
+      .site-header a:active,
+      .site-header button:active {
+        transform: scale(0.97);
+      }
+
+      .site-header a:focus-visible,
+      .site-header button:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 4px;
+      }
+
+      .logo-svg {
+        width: 132px;
+        height: auto;
+        display: block;
+      }
+
+      .logo-svg text {
+        fill: var(--color-accent);
+        font-family: var(--font-display);
+        font-size: 42px;
+        letter-spacing: 2px;
+      }
+
+      .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 64px;
+      }
+
+      .nav-about {
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+      }
+
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 30px;
+        padding: 4px 0;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 30px;
+        height: 2.2px;
+        background: var(--color-accent);
+      }
+
+      .hamburger.is-open span:first-child {
+        transform: translateY(3.5px) rotate(45deg);
+      }
+
+      .hamburger.is-open span:last-child {
+        transform: translateY(-3.5px) rotate(-45deg);
+      }
+
+      .hamburger span {
+        transition: transform 0.2s ease;
+      }
+
+      .nav-bag {
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        letter-spacing: 0.04em;
+      }
+
+      /* —— Hero —— */
+      .hero-section {
+        height: 280vh;
+        background: #000000;
+        z-index: 10;
+        position: relative;
+      }
+
+      .hero-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        background: #000000;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 48px;
+        overflow: hidden;
+      }
+
+      .hero-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+      }
+
+      .video-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.62) 0%,
+          rgba(0, 0, 0, 0.28) 38%,
+          transparent 72%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 3;
+        max-width: 700px;
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(36px, 6vw, 72px);
+        font-weight: 400;
+        line-height: 1.05;
+        letter-spacing: -1px;
+        color: #ffffff;
+        text-shadow:
+          0 2px 28px rgba(0, 0, 0, 0.55),
+          0 1px 4px rgba(0, 0, 0, 0.35);
+      }
+
+      .hero-title-line {
+        display: block;
+        overflow: hidden;
+      }
+
+      .hero-title-line-inner {
+        display: block;
+      }
+
+      .hero-title .char {
+        display: inline-block;
+        will-change: transform, opacity, filter;
+      }
+
+      .hero-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 0%;
+        background: var(--color-accent);
+        z-index: 4;
+        pointer-events: none;
+      }
+
+      .hero-scroll-cue {
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .hero-scroll-cue svg {
+        width: 14px;
+        height: 14px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.5;
+        animation: scroll-cue-bob 2s ease-in-out infinite;
+      }
+
+      @keyframes scroll-cue-bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(4px);
+        }
+      }
+
+      .collection-phase-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 25;
+        font-family: var(--font-display);
+        font-size: clamp(28px, 4vw, 48px);
+        color: #ffffff;
+        text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      /* Capsule button */
+      .capsule-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 10px;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 100px;
+        padding: 4px 4px 4px 18px;
+        transition: background 0.25s ease, color 0.25s ease;
+      }
+
+      .capsule-btn span.label {
+        font-size: 13px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #000000;
+        transition: color 0.25s ease;
+      }
+
+      .capsule-btn .plus-circle {
+        position: relative;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #2e2e2e;
+        flex-shrink: 0;
+        transition: background 0.25s ease;
+      }
+
+      .capsule-btn .plus-circle::before,
+      .capsule-btn .plus-circle::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #ffffff;
+        transform: translate(-50%, -50%);
+        transition: background 0.25s ease;
+      }
+
+      .capsule-btn .plus-circle::before {
+        width: 10px;
+        height: 1.5px;
+      }
+
+      .capsule-btn .plus-circle::after {
+        width: 1.5px;
+        height: 10px;
+      }
+
+      .capsule-btn:hover {
+        background: #000000;
+      }
+
+      .capsule-btn:hover span.label {
+        color: #ffffff;
+      }
+
+      .capsule-btn:hover .plus-circle {
+        background: #ffffff;
+      }
+
+      .capsule-btn:hover .plus-circle::before,
+      .capsule-btn:hover .plus-circle::after {
+        background: #000000;
+      }
+
+      /* —— Awards / carousel —— */
+      .awards-section {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        border-top: 1px solid var(--color-divider);
+        border-bottom: 1px solid var(--color-divider);
+        z-index: 10;
+        background: var(--color-bg);
+      }
+
+      .awards-grid {
+        display: flex;
+        width: max-content;
+        height: 100%;
+        will-change: transform;
+      }
+
+      .award-card {
+        width: 33.333vw;
+        height: 100%;
+        border-right: 1px solid var(--color-divider);
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(40px, 8vh, 80px) 48px;
+        gap: clamp(24px, 4vh, 48px);
+        flex-shrink: 0;
+      }
+
+      .award-card .img-wrap {
+        height: 280px;
+        width: 100%;
+        max-width: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .award-card img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+      }
+
+      .award-card .product-name {
+        font-size: 18px;
+        font-weight: 400;
+        letter-spacing: -0.2px;
+        text-align: center;
+      }
+
+      .award-card .product-price {
+        font-size: 16px;
+        font-weight: 500;
+        opacity: 0.6;
+        text-align: center;
+      }
+
+      .video-scaling-wrapper {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 20;
+        will-change: width;
+        pointer-events: none;
+      }
+
+      .video-scaling-wrapper.is-open {
+        pointer-events: auto;
+      }
+
+      .reveal-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+      }
+
+      /* —— Stats —— */
+      .stats-section {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        border-bottom: 1px solid var(--color-divider);
+        position: relative;
+        z-index: 10;
+        background: var(--color-bg);
+      }
+
+      .stats-left {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 48px 96px 48px 48px;
+      }
+
+      .stats-left h2 {
+        font-family: var(--font-display);
+        font-size: clamp(32px, 4vw, 42px);
+        font-weight: 400;
+        line-height: 1.15;
+      }
+
+      .stats-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .stats-copy p {
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: -0.2px;
+      }
+
+      .stats-right {
+        border-left: 1px solid var(--color-divider);
+      }
+
+      .stat-card {
+        padding: 48px;
+        min-height: 45vh;
+        border-bottom: 1px solid var(--color-divider);
+      }
+
+      .stat-card:last-child {
+        border-bottom: none;
+      }
+
+      .stomp-wrapper {
+        overflow: hidden;
+      }
+
+      .stomp-stack .heading-style-h1:first-child {
+        display: none;
+      }
+
+      .heading-style-h1 {
+        font-family: var(--font-display);
+        font-size: clamp(46px, 5.5vw, 70px);
+        font-weight: 400;
+        letter-spacing: -1.5px;
+        line-height: 0.95;
+      }
+
+      .heading-style-h1 .char {
+        display: inline-block;
+      }
+
+      .detail-paragraph {
+        font-size: 24px;
+        padding-top: 42px;
+        line-height: 1.2;
+      }
+
+      .detail-paragraph .word {
+        display: inline-block;
+        margin-right: 0.25em;
+      }
+
+      .est-note {
+        font-size: 13px;
+        margin-top: 12px;
+        opacity: 0.7;
+      }
+
+      /* —— Footer —— */
+      .site-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        background: #ffffff;
+        padding: 80px 48px;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1.5fr;
+        gap: 48px;
+      }
+
+      .footer-spacer {
+        pointer-events: none;
+        background: transparent;
+        position: relative;
+        z-index: 2;
+      }
+
+      .footer-col h3,
+      .footer-col .footer-heading {
+        font-size: 18px;
+        font-weight: 400;
+        letter-spacing: -0.2px;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      .footer-credits,
+      .footer-desc {
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .footer-desc {
+        max-width: 380px;
+        margin-bottom: 24px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .footer-links a,
+      .footer-col a {
+        font-size: 18px;
+        font-weight: 400;
+        transition: opacity 0.2s ease;
+      }
+
+      .footer-links a:hover,
+      .footer-col a:hover {
+        opacity: 0.6;
+      }
+
+      .newsletter-form {
+        display: flex;
+        align-items: center;
+        background: #f7f7f5;
+        border-radius: 100px;
+        padding: 6px 6px 6px 24px;
+        max-width: 440px;
+        transition: box-shadow 0.2s ease;
+      }
+
+      .newsletter-form:focus-within {
+        box-shadow: 0 0 0 1px #000000;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        font-family: var(--font-stack);
+        outline: none;
+        min-width: 0;
+      }
+
+      .newsletter-form .capsule-btn {
+        margin-top: 0;
+        flex-shrink: 0;
+      }
+
+      .main-content {
+        position: relative;
+        z-index: 10;
+        background: transparent;
+      }
+
+      /* —— Overlays (menu + bag) —— */
+      .panel-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(0, 0, 0, 0.35);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+      }
+
+      .panel-backdrop.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .nav-panel,
+      .bag-panel {
+        position: fixed;
+        top: 0;
+        z-index: 210;
+        background: #ffffff;
+        transition: transform 0.3s ease;
+      }
+
+      .nav-panel {
+        right: 0;
+        width: min(320px, 88vw);
+        height: 100%;
+        padding: 100px 40px 40px;
+        transform: translateX(100%);
+        border-left: 1px solid var(--color-divider);
+      }
+
+      .nav-panel.is-open {
+        transform: translateX(0);
+      }
+
+      .nav-panel a {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 28px;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        transition: opacity 0.2s ease;
+      }
+
+      .nav-panel a:hover {
+        opacity: 0.6;
+      }
+
+      .bag-panel {
+        right: 0;
+        width: min(380px, 92vw);
+        height: 100%;
+        padding: 100px 32px 32px;
+        transform: translateX(100%);
+        border-left: 1px solid var(--color-divider);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .bag-panel.is-open {
+        transform: translateX(0);
+      }
+
+      .bag-panel h2 {
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 400;
+        margin-bottom: 24px;
+      }
+
+      .bag-panel p {
+        font-size: 16px;
+        line-height: 1.5;
+        opacity: 0.7;
+        flex: 1;
+      }
+
+      .bag-panel .capsule-btn {
+        align-self: flex-start;
+      }
+
+      .panel-close {
+        position: absolute;
+        top: 36px;
+        right: 32px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+      }
+
+      /* —— Tablet —— */
+      @media (min-width: 769px) and (max-width: 1199px) {
+        .site-header {
+          top: 24px;
+          left: 24px;
+          right: 24px;
+        }
+
+        .header-nav {
+          gap: 48px;
+        }
+
+        .nav-actions {
+          gap: 32px;
+        }
+
+        .stats-left {
+          padding: 40px 32px;
+        }
+
+        .hero-title {
+          font-size: 48px;
+        }
+
+        .heading-style-h1 {
+          font-size: 44px !important;
+        }
+
+        .stats-left h2 {
+          font-size: 30px;
+        }
+
+        .stats-copy p,
+        .detail-paragraph {
+          font-size: 18px;
+        }
+
+        .award-card {
+          width: 50vw;
+        }
+
+        .site-footer {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .site-footer .footer-col:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+
+      /* —— Mobile —— */
+      @media (max-width: 768px) {
+        .site-header {
+          top: 16px;
+          left: 16px;
+          right: 16px;
+        }
+
+        .header-nav {
+          gap: 24px;
+        }
+
+        .nav-about {
+          font-size: 13px;
+        }
+
+        .nav-actions {
+          gap: 20px;
+        }
+
+        .nav-about,
+        .nav-bag,
+        .hamburger {
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+        }
+
+        .hero-sticky {
+          padding: 24px 16px 32px;
+        }
+
+        .hero-title {
+          font-size: 38px;
+        }
+
+        .stats-section {
+          grid-template-columns: 1fr;
+        }
+
+        .stats-left {
+          position: relative;
+          height: auto;
+          padding: 40px 16px;
+          gap: 40px;
+        }
+
+        .stats-right {
+          border-left: none;
+          border-top: 1px solid var(--color-divider);
+        }
+
+        .heading-style-h1 {
+          font-size: 34px !important;
+        }
+
+        .stats-copy p,
+        .detail-paragraph {
+          font-size: 15px;
+        }
+
+        .award-card {
+          width: 85vw;
+          padding: 40px 24px;
+        }
+
+        .award-card .img-wrap {
+          height: 200px;
+        }
+
+        .site-footer {
+          grid-template-columns: 1fr;
+          padding: 48px 16px;
+          gap: 32px;
+        }
+
+        .capsule-btn {
+          min-height: 44px;
+        }
+
+        .newsletter-form {
+          width: 100%;
+          max-width: none;
+        }
+
+        .newsletter-form .capsule-btn {
+          width: auto;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-section {
+          height: 100vh;
+        }
+
+        .hero-scroll-cue,
+        .hero-progress,
+        .collection-phase-label {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="#top" class="logo-link" aria-label="Sonara home">
+        <svg class="logo-svg" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" role="img">
+          <title>Sonara</title>
+          <text x="0" y="44">SONARA</text>
+        </svg>
+      </a>
+      <nav class="header-nav" aria-label="Primary">
+        <a class="nav-about" href="#about" id="nav-about">ABOUT</a>
+        <div class="nav-actions">
+          <button class="hamburger" type="button" id="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav-panel">
+            <span></span>
+            <span></span>
+          </button>
+          <button class="nav-bag" type="button" id="bag-btn" aria-label="Shopping bag" aria-expanded="false" aria-controls="bag-panel">[ BAG ]</button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="panel-backdrop" id="panel-backdrop" hidden></div>
+
+    <aside class="nav-panel" id="nav-panel" aria-label="Site menu" aria-hidden="true">
+      <button class="panel-close" type="button" id="nav-panel-close">Close</button>
+      <a href="#collection" data-scroll>Collection</a>
+      <a href="#about" data-scroll>About</a>
+      <a href="#site-footer" data-scroll>Newsletter</a>
+    </aside>
+
+    <aside class="bag-panel" id="bag-panel" aria-label="Shopping bag" aria-hidden="true">
+      <button class="panel-close" type="button" id="bag-panel-close">Close</button>
+      <h2>Your Bag</h2>
+      <p>Your bag is empty. Explore the collection to find a piece worth keeping.</p>
+      <button class="capsule-btn" type="button" id="bag-shop-btn">
+        <span class="label">VIEW COLLECTION</span>
+        <span class="plus-circle" aria-hidden="true"></span>
+      </button>
+    </aside>
+
+    <div class="main-content" id="top">
+      <!-- 1. Hero -->
+      <section class="hero-section" aria-label="Hero">
+        <div class="hero-sticky">
+          <video
+            class="hero-video"
+            id="hero-video"
+            playsinline
+            muted
+            preload="auto"
+            poster="/posters/hero.jpg"
+          >
+            <source
+              media="(max-width: 768px)"
+              src="/videos/hero-mobile.mp4"
+              type="video/mp4"
+            />
+            <source
+              src="https://d8j0ntlcm91z4.cloudfront.net/user_39ca84eAE1ODL9hbR5VhoEj8tBf/hf_20260627_212146_743b92b3-40a3-46cb-988d-7bf716564ec3.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div class="video-overlay"></div>
+          <div class="hero-progress" id="hero-progress" aria-hidden="true"></div>
+          <div class="hero-scroll-cue" id="hero-scroll-cue" aria-hidden="true">
+            <span>Scroll</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M6 13l6 6 6-6" />
+            </svg>
+          </div>
+          <div class="hero-content">
+            <h1 class="hero-title">
+              <span class="hero-title-line"
+                ><span class="hero-title-line-inner">ETERNAL</span></span
+              >
+              <span class="hero-title-line"
+                ><span class="hero-title-line-inner">LIGHT</span></span
+              >
+            </h1>
+            <button class="capsule-btn" id="discover-btn" type="button">
+              <span class="label">DISCOVER</span>
+              <span class="plus-circle" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Product carousel -->
+      <section class="awards-section" id="collection" aria-label="Collection">
+        <p class="collection-phase-label" id="collection-phase-label" aria-live="polite"></p>
+        <div class="awards-grid" id="awards-grid">
+          <article class="award-card">
+            <div class="img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80"
+                alt="Solitaire Ring"
+                loading="lazy"
+              />
+            </div>
+            <p class="product-name">Solitaire Ring</p>
+            <p class="product-price">$4,800</p>
+          </article>
+          <article class="award-card">
+            <div class="img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80"
+                alt="Tennis Bracelet"
+                loading="lazy"
+              />
+            </div>
+            <p class="product-name">Tennis Bracelet</p>
+            <p class="product-price">$6,200</p>
+          </article>
+          <article class="award-card">
+            <div class="img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&q=80"
+                alt="Drop Earrings"
+                loading="lazy"
+              />
+            </div>
+            <p class="product-name">Drop Earrings</p>
+            <p class="product-price">$3,400</p>
+          </article>
+          <article class="award-card">
+            <div class="img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=80"
+                alt="Halo Pendant"
+                loading="lazy"
+              />
+            </div>
+            <p class="product-name">Halo Pendant</p>
+            <p class="product-price">$2,900</p>
+          </article>
+          <article class="award-card">
+            <div class="img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&q=80"
+                alt="Eternity Band"
+                loading="lazy"
+              />
+            </div>
+            <p class="product-name">Eternity Band</p>
+            <p class="product-price">$5,600</p>
+          </article>
+          <article class="award-card">
+            <div class="img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80"
+                alt="Riviera Necklace"
+                loading="lazy"
+              />
+            </div>
+            <p class="product-name">Riviera Necklace</p>
+            <p class="product-price">$8,400</p>
+          </article>
+        </div>
+        <div class="video-scaling-wrapper" id="video-scaling-wrapper">
+          <video
+            class="reveal-video"
+            id="reveal-video"
+            playsinline
+            muted
+            preload="metadata"
+            poster="/posters/reveal.jpg"
+          >
+            <source
+              media="(max-width: 768px)"
+              src="/videos/reveal-mobile.mp4"
+              type="video/mp4"
+            />
+            <source
+              src="https://d8j0ntlcm91z4.cloudfront.net/user_39ca84eAE1ODL9hbR5VhoEj8tBf/hf_20260628_122130_8b16d300-75cb-49f5-82ce-afd6b79c2d79.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+      </section>
+
+      <!-- 3. Stats -->
+      <section class="stats-section" id="about" aria-label="About Sonara">
+        <div class="stats-left">
+          <h2 data-fade-slide-in>Cut Without Compromise</h2>
+          <div class="stats-copy">
+            <p data-fade-slide-in>
+              Each diamond is selected for brilliance first — then set by a
+              single pair of hands. No assembly line. No shortcuts in the
+              metal, the cut, or the finish.
+            </p>
+            <p data-fade-slide-in>
+              We work in platinum and 18k gold. Stones are hand-set. Proportions
+              are measured, not approximated. Nothing is plated for show.
+            </p>
+            <p data-fade-slide-in>
+              Sonara exists for those who wear jewelry that endures. Not
+              decoration — inheritance. One piece at a time, made to last a
+              lifetime.
+            </p>
+          </div>
+          <button
+            class="capsule-btn"
+            data-fade-slide-in
+            type="button"
+            id="view-collection-btn"
+          >
+            <span class="label">VIEW COLLECTION</span>
+            <span class="plus-circle" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="stats-right">
+          <article class="stat-card">
+            <div class="stomp-wrapper">
+              <div class="stomp-stack stack-a">
+                <h3 class="heading-style-h1">VVS+</h3>
+                <h3 class="heading-style-h1">VVS+</h3>
+              </div>
+              <div class="stomp-stack stack-b">
+                <h3 class="heading-style-h1">Clarity</h3>
+                <h3 class="heading-style-h1">Clarity</h3>
+              </div>
+            </div>
+            <p class="detail-paragraph">
+              Only high-clarity diamonds — chosen for fire, not filler grades
+            </p>
+          </article>
+          <article class="stat-card">
+            <div class="stomp-wrapper">
+              <div class="stomp-stack stack-a">
+                <h3 class="heading-style-h1">18K</h3>
+                <h3 class="heading-style-h1">18K</h3>
+              </div>
+              <div class="stomp-stack stack-b">
+                <h3 class="heading-style-h1">&amp; Platinum</h3>
+                <h3 class="heading-style-h1">&amp; Platinum</h3>
+              </div>
+            </div>
+            <p class="detail-paragraph">
+              Precious metals only — no plating, no compromise on the setting
+            </p>
+          </article>
+          <article class="stat-card">
+            <div class="stomp-wrapper">
+              <div class="stomp-stack stack-a">
+                <h3 class="heading-style-h1">Hand</h3>
+                <h3 class="heading-style-h1">Hand</h3>
+              </div>
+              <div class="stomp-stack stack-b">
+                <h3 class="heading-style-h1">Set Stones</h3>
+                <h3 class="heading-style-h1">Set Stones</h3>
+              </div>
+            </div>
+            <p class="detail-paragraph">
+              Every stone seated by hand — precision you can see in the light
+            </p>
+          </article>
+          <article class="stat-card">
+            <div class="stomp-wrapper">
+              <div class="stomp-stack stack-a">
+                <h3 class="heading-style-h1">Lifetime</h3>
+                <h3 class="heading-style-h1">Lifetime</h3>
+              </div>
+              <div class="stomp-stack stack-b">
+                <h3 class="heading-style-h1">Guarantee</h3>
+                <h3 class="heading-style-h1">Guarantee</h3>
+              </div>
+            </div>
+            <p class="detail-paragraph">
+              We stand behind every piece we make, forever
+            </p>
+            <p class="est-note">Est. Sonara Atelier, 2019.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer-spacer" id="footer-spacer" aria-hidden="true"></div>
+
+    <footer class="site-footer" id="site-footer">
+      <div class="footer-col">
+        <a class="footer-heading" href="#sign-in" id="sign-in">Sign in</a>
+        <div class="footer-credits">
+          Crafted in small editions<br />
+          Sonara Atelier<br />
+          <br />
+          Based in New York<br />
+          (c) Sonara 2026<br />
+          All pieces are original designs.
+        </div>
+      </div>
+      <div class="footer-col">
+        <a class="footer-heading" href="https://instagram.com" target="_blank" rel="noopener"
+          >Instagram</a
+        >
+        <div class="footer-links">
+          <a href="#refund">Refund Policy</a>
+          <a href="#privacy">Privacy Policy</a>
+          <a href="#terms">Terms of Service</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Newsletter</h3>
+        <p class="footer-desc">
+          Join our list. Be first to know new collections. A quiet welcome gift
+          on your first order.
+        </p>
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" name="email" placeholder="Email" required aria-label="Email" />
+          <button class="capsule-btn" type="submit">
+            <span class="label">SUBSCRIBE</span>
+            <span class="plus-circle" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+    </footer>
+
+    <script>
+      // —— Media constants (swap these to rebrand) ——
+      // Original cinematic jewelry clips (same URLs Higgsfield resolves to)
+      const HERO_VIDEO_URL =
+        "https://d8j0ntlcm91z4.cloudfront.net/user_39ca84eAE1ODL9hbR5VhoEj8tBf/hf_20260627_212146_743b92b3-40a3-46cb-988d-7bf716564ec3.mp4";
+      const REVEAL_VIDEO_URL =
+        "https://d8j0ntlcm91z4.cloudfront.net/user_39ca84eAE1ODL9hbR5VhoEj8tBf/hf_20260628_122130_8b16d300-75cb-49f5-82ce-afd6b79c2d79.mp4";
+      const HIGGSFIELD_HERO = "https://higgsfield.ai/s/keldUFnImRA";
+      const HIGGSFIELD_REVEAL = "https://higgsfield.ai/s/iK6bYyCxd0I";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      function splitChars(el) {
+        const text = el.textContent || "";
+        el.textContent = "";
+        [...text].forEach((ch) => {
+          const span = document.createElement("span");
+          span.className = "char";
+          span.textContent = ch === " " ? "\u00A0" : ch;
+          el.appendChild(span);
+        });
+      }
+
+      function splitWords(el) {
+        const text = el.textContent || "";
+        el.textContent = "";
+        text.trim().split(/\s+/).forEach((word) => {
+          const span = document.createElement("span");
+          span.className = "word";
+          span.textContent = word;
+          el.appendChild(span);
+        });
+      }
+
+      function syncFooterSpacer() {
+        const footer = document.getElementById("site-footer");
+        const spacer = document.getElementById("footer-spacer");
+        if (footer && spacer) {
+          spacer.style.height = footer.offsetHeight + "px";
+        }
+      }
+
+      // ponytail: direct scroll-to-time map; keep !video.seeking guard per AGENTS.md
+      function seekVideo(video, time) {
+        if (!video || !video.duration || video.seeking) return;
+        const t = Math.min(video.duration, Math.max(0, time));
+        if (Math.abs(video.currentTime - t) > 0.01) {
+          video.currentTime = t;
+        }
+      }
+
+      function syncHeroVideoToScroll() {
+        const section = document.querySelector(".hero-section");
+        const video = document.getElementById("hero-video");
+        if (!section || !video?.duration || prefersReducedMotion) return;
+        const st = ScrollTrigger.getAll().find((t) => t.trigger === section);
+        if (st) seekVideo(video, st.progress * video.duration);
+      }
+
+      function updateHeroAffordances(progress) {
+        const bar = document.getElementById("hero-progress");
+        const cue = document.getElementById("hero-scroll-cue");
+        if (bar) bar.style.width = progress * 100 + "%";
+        if (cue) cue.style.opacity = progress > 0.85 ? "0" : "1";
+      }
+
+      let awardsTrigger = null;
+      let leftFadeTriggers = [];
+
+      function setupHeroScrub() {
+        const section = document.querySelector(".hero-section");
+        const video = document.getElementById("hero-video");
+        const chars = document.querySelectorAll(".hero-title .char");
+        const discover = document.getElementById("discover-btn");
+
+        if (!section || !video) return;
+
+        video.pause();
+
+        if (prefersReducedMotion) {
+          video.loop = true;
+          video.play().catch(() => {});
+          return;
+        }
+
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: "bottom bottom",
+          onUpdate: (self) => {
+            const progress = self.progress;
+            if (video.duration) {
+              seekVideo(video, progress * video.duration);
+            }
+            updateHeroAffordances(progress);
+
+            // Per-character exit after 80%
+            if (progress > 0.8) {
+              const t = (progress - 0.8) / 0.2;
+              const eased = 1 - Math.pow(1 - t, 3);
+              chars.forEach((char, i) => {
+                const stagger = i / Math.max(chars.length - 1, 1);
+                const local = Math.min(1, Math.max(0, (eased - stagger * 0.35) / 0.65));
+                char.style.opacity = String(1 - local);
+                char.style.filter = `blur(${local * 8}px)`;
+                char.style.transform = `translateY(${-local * 40}px)`;
+              });
+              if (discover) {
+                const btnT = Math.pow(t, 4);
+                discover.style.opacity = String(1 - btnT);
+                discover.style.transform = `translateY(${-btnT * 24}px)`;
+              }
+            } else {
+              chars.forEach((char) => {
+                char.style.opacity = "1";
+                char.style.filter = "blur(0px)";
+                char.style.transform = "translateY(0)";
+              });
+              if (discover) {
+                discover.style.opacity = "1";
+                discover.style.transform = "translateY(0)";
+              }
+            }
+          },
+        });
+      }
+
+      function setupAwards() {
+        const section = document.querySelector(".awards-section");
+        const grid = document.getElementById("awards-grid");
+        const wrapper = document.getElementById("video-scaling-wrapper");
+        const video = document.getElementById("reveal-video");
+        const phaseLabel = document.getElementById("collection-phase-label");
+
+        if (!section || !grid || !wrapper || !video) return;
+
+        video.pause();
+
+        if (prefersReducedMotion) return;
+
+        const overflow = Math.max(0, grid.scrollWidth - window.innerWidth);
+        const horizEnd = overflow > 0 ? 1 / (1 + 0.8) : 0;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => "+=" + (window.innerHeight * 2.5 + overflow),
+            pin: true,
+            scrub: true,
+            anticipatePin: 1,
+            onUpdate: () => {
+              const w = parseFloat(wrapper.style.width) || 0;
+              wrapper.classList.toggle("is-open", w > 1);
+            },
+          },
+        });
+
+        awardsTrigger = tl.scrollTrigger;
+
+        if (overflow > 0) {
+          tl.to(grid, {
+            x: -overflow,
+            ease: "none",
+            duration: 1,
+          });
+        }
+
+        tl.fromTo(
+          wrapper,
+          { width: "0%" },
+          { width: "100%", ease: "none", duration: 0.8 }
+        );
+
+        tl.eventCallback("onUpdate", () => {
+          const prog = tl.progress();
+          if (phaseLabel) {
+            if (prog < horizEnd * 0.15) {
+              phaseLabel.textContent = "The Collection";
+              phaseLabel.style.opacity = "0";
+            } else if (prog < horizEnd) {
+              phaseLabel.textContent = "The Collection";
+              phaseLabel.style.opacity = String(
+                Math.min(1, (prog - horizEnd * 0.15) / (horizEnd * 0.35 || 1))
+              );
+            } else {
+              phaseLabel.textContent = "In Motion";
+              phaseLabel.style.opacity = String(
+                Math.min(1, (prog - horizEnd) / (1 - horizEnd || 1))
+              );
+            }
+          }
+          if (!video.duration) return;
+          if (prog > horizEnd) {
+            const vp = (prog - horizEnd) / (1 - horizEnd || 1);
+            seekVideo(video, Math.min(1, Math.max(0, vp)) * video.duration);
+          }
+        });
+      }
+
+      function setupLeftFades() {
+        leftFadeTriggers.forEach((t) => t.kill());
+        leftFadeTriggers = [];
+
+        const els = document.querySelectorAll("[data-fade-slide-in]");
+        gsap.set(els, { autoAlpha: 0, y: 20 });
+
+        const trigger = ScrollTrigger.create({
+          trigger: ".stats-left",
+          start: "top 70%",
+          once: true,
+          onEnter: () => {
+            gsap.to(els, {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power2.out",
+            });
+          },
+        });
+        leftFadeTriggers.push(trigger);
+      }
+
+      function setupStatSplits() {
+        document
+          .querySelectorAll(".stomp-stack .heading-style-h1:last-child")
+          .forEach(splitChars);
+        document.querySelectorAll(".detail-paragraph").forEach(splitWords);
+      }
+
+      function rebuildAnimations() {
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+        gsap.set("#awards-grid", { clearProps: "transform" });
+        gsap.set("#video-scaling-wrapper", { clearProps: "width" });
+        syncFooterSpacer();
+        setupHeroScrub();
+        setupAwards();
+        setupLeftFades();
+        ScrollTrigger.refresh();
+      }
+
+      async function tryRefreshVideo(videoEl, shareUrl, fallbackDesktop) {
+        if (!videoEl) return;
+        const desktopSource =
+          videoEl.querySelector("source:not([media])") ||
+          [...videoEl.querySelectorAll("source")].find((s) => !s.media);
+        try {
+          const res = await fetch(
+            "/api/higgsfield-video?url=" + encodeURIComponent(shareUrl)
+          );
+          const data = await res.json();
+          if (data.success && data.url) {
+            if (desktopSource) {
+              desktopSource.src = data.url;
+            } else {
+              videoEl.src = data.url;
+            }
+            videoEl.load();
+            return;
+          }
+        } catch (_) {
+          /* keep fallback */
+        }
+        if (desktopSource && !desktopSource.src) {
+          desktopSource.src = fallbackDesktop;
+          videoEl.load();
+        }
+      }
+
+      function setupRevealLazyLoad() {
+        const revealVideo = document.getElementById("reveal-video");
+        const collection = document.getElementById("collection");
+        if (!revealVideo || !collection || prefersReducedMotion) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (entries[0]?.isIntersecting) {
+              revealVideo.preload = "auto";
+              revealVideo.load();
+              observer.disconnect();
+            }
+          },
+          { rootMargin: "240px" }
+        );
+        observer.observe(collection);
+      }
+
+      function scrollToSection(selector) {
+        const el = document.querySelector(selector);
+        if (!el) return;
+        closePanels();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function closePanels() {
+        const backdrop = document.getElementById("panel-backdrop");
+        const navPanel = document.getElementById("nav-panel");
+        const bagPanel = document.getElementById("bag-panel");
+        const menuBtn = document.getElementById("menu-btn");
+        const bagBtn = document.getElementById("bag-btn");
+        navPanel?.classList.remove("is-open");
+        bagPanel?.classList.remove("is-open");
+        backdrop?.classList.remove("is-open");
+        if (backdrop) backdrop.hidden = true;
+        navPanel?.setAttribute("aria-hidden", "true");
+        bagPanel?.setAttribute("aria-hidden", "true");
+        menuBtn?.classList.remove("is-open");
+        menuBtn?.setAttribute("aria-expanded", "false");
+        bagBtn?.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      }
+
+      function openPanel(kind) {
+        const isMenu = kind === "menu";
+        const backdrop = document.getElementById("panel-backdrop");
+        const navPanel = document.getElementById("nav-panel");
+        const bagPanel = document.getElementById("bag-panel");
+        const menuBtn = document.getElementById("menu-btn");
+        const bagBtn = document.getElementById("bag-btn");
+        navPanel?.classList.toggle("is-open", isMenu);
+        bagPanel?.classList.toggle("is-open", !isMenu);
+        backdrop?.classList.add("is-open");
+        if (backdrop) backdrop.hidden = false;
+        navPanel?.setAttribute("aria-hidden", String(!isMenu));
+        bagPanel?.setAttribute("aria-hidden", String(isMenu));
+        menuBtn?.classList.toggle("is-open", isMenu);
+        menuBtn?.setAttribute("aria-expanded", String(isMenu));
+        bagBtn?.setAttribute("aria-expanded", String(!isMenu));
+        document.body.style.overflow = "hidden";
+      }
+
+      function bindUi() {
+        document.getElementById("discover-btn")?.addEventListener("click", () => {
+          scrollToSection("#site-footer");
+        });
+
+        document
+          .getElementById("view-collection-btn")
+          ?.addEventListener("click", () => {
+            scrollToSection("#collection");
+          });
+
+        document.getElementById("nav-about")?.addEventListener("click", (e) => {
+          e.preventDefault();
+          scrollToSection("#about");
+        });
+
+        document.querySelector(".logo-link")?.addEventListener("click", (e) => {
+          e.preventDefault();
+          scrollToSection("#top");
+        });
+
+        document.getElementById("menu-btn")?.addEventListener("click", () => {
+          const navPanel = document.getElementById("nav-panel");
+          navPanel?.classList.contains("is-open") ? closePanels() : openPanel("menu");
+        });
+
+        document.getElementById("bag-btn")?.addEventListener("click", () => {
+          const bagPanel = document.getElementById("bag-panel");
+          bagPanel?.classList.contains("is-open") ? closePanels() : openPanel("bag");
+        });
+
+        document.getElementById("nav-panel-close")?.addEventListener("click", closePanels);
+        document.getElementById("bag-panel-close")?.addEventListener("click", closePanels);
+        document.getElementById("panel-backdrop")?.addEventListener("click", closePanels);
+        document.getElementById("bag-shop-btn")?.addEventListener("click", () => {
+          scrollToSection("#collection");
+        });
+
+        document.getElementById("sign-in")?.addEventListener("click", (e) => {
+          e.preventDefault();
+          alert("Sign in opens with your client account at launch.");
+        });
+
+        document.querySelectorAll("[data-scroll]").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            scrollToSection(link.getAttribute("href"));
+          });
+        });
+
+        document
+          .getElementById("newsletter-form")
+          ?.addEventListener("submit", (e) => {
+            e.preventDefault();
+            alert("You're on the list. Welcome.");
+            e.target.reset();
+          });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closePanels();
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .querySelectorAll(".hero-title-line-inner")
+          .forEach(splitChars);
+        setupStatSplits();
+        bindUi();
+
+        const heroVideo = document.getElementById("hero-video");
+        const revealVideo = document.getElementById("reveal-video");
+        tryRefreshVideo(heroVideo, HIGGSFIELD_HERO, HERO_VIDEO_URL);
+        tryRefreshVideo(revealVideo, HIGGSFIELD_REVEAL, REVEAL_VIDEO_URL);
+        setupRevealLazyLoad();
+
+        heroVideo?.addEventListener("loadedmetadata", syncHeroVideoToScroll);
+
+        document.fonts.ready.then(() => {
+          syncFooterSpacer();
+          rebuildAnimations();
+          syncHeroVideoToScroll();
+        });
+
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            rebuildAnimations();
+          }, 200);
+        });
+      });
+    </script>
+  </body>
+</html>
