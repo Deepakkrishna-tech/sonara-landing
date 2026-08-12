@@ -212,9 +212,10 @@
         pointer-events: none;
         background: linear-gradient(
           to top,
-          rgba(0, 0, 0, 0.62) 0%,
-          rgba(0, 0, 0, 0.28) 38%,
-          transparent 72%
+          rgba(0, 0, 0, 0.78) 0%,
+          rgba(0, 0, 0, 0.48) 40%,
+          rgba(0, 0, 0, 0.15) 62%,
+          transparent 82%
         );
       }
 
@@ -222,6 +223,21 @@
         position: relative;
         z-index: 3;
         max-width: 700px;
+        padding-bottom: 8px;
+      }
+
+      .hero-content::before {
+        content: "";
+        position: absolute;
+        inset: -32px -40px -24px -24px;
+        z-index: -1;
+        pointer-events: none;
+        background: linear-gradient(
+          120deg,
+          rgba(0, 0, 0, 0.55) 0%,
+          rgba(0, 0, 0, 0.28) 55%,
+          transparent 100%
+        );
       }
 
       .hero-title {
@@ -232,8 +248,9 @@
         letter-spacing: -1px;
         color: #ffffff;
         text-shadow:
-          0 2px 28px rgba(0, 0, 0, 0.55),
-          0 1px 4px rgba(0, 0, 0, 0.35);
+          0 2px 32px rgba(0, 0, 0, 0.75),
+          0 1px 8px rgba(0, 0, 0, 0.55),
+          0 0 1px rgba(0, 0, 0, 0.8);
       }
 
       .hero-title-line {
@@ -423,12 +440,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background: #f3f2ef;
+        padding: 20px;
       }
 
       .award-card img {
         max-height: 100%;
         max-width: 100%;
         object-fit: contain;
+        filter: contrast(1.05);
       }
 
       .award-card .product-name {
@@ -1002,7 +1022,7 @@
               <img
                 src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80"
                 alt="Solitaire Ring"
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <p class="product-name">Solitaire Ring</p>
@@ -1013,7 +1033,7 @@
               <img
                 src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80"
                 alt="Tennis Bracelet"
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <p class="product-name">Tennis Bracelet</p>
@@ -1024,7 +1044,7 @@
               <img
                 src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&q=80"
                 alt="Drop Earrings"
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <p class="product-name">Drop Earrings</p>
@@ -1035,7 +1055,7 @@
               <img
                 src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=80"
                 alt="Halo Pendant"
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <p class="product-name">Halo Pendant</p>
@@ -1044,9 +1064,9 @@
           <article class="award-card">
             <div class="img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&q=80"
+                src="https://images.unsplash.com/photo-1621254935500-de564c088b8d?w=800&q=80"
                 alt="Eternity Band"
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <p class="product-name">Eternity Band</p>
@@ -1057,7 +1077,7 @@
               <img
                 src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80"
                 alt="Riviera Necklace"
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <p class="product-name">Riviera Necklace</p>
